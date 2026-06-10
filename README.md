@@ -1,42 +1,41 @@
-# ⚛️ Simulaciones de Nanoestructuras y Mecánica Cuántica
+# ⚛️ Nanostructure Simulations and Quantum Mechanics
 
-Este repositorio contiene las resoluciones computacionales desarrolladas para el Laboratorio de Advanced Quantum Mechanics. El proyecto explora numéricamente dos fenómenos fundamentales de la mecánica cuántica aplicada a dispositivos de estado sólido: el efecto túnel resonante en heteroestructuras y la cuantización de órbitas electrónicas (niveles de Landau) bajo campos magnéticos.  
+This repository contains the computational solutions developed for the Advanced Quantum Mechanics Laboratory. The project numerically explores two fundamental phenomena of quantum mechanics applied to solid-state devices: resonant tunneling in heterostructures and the quantization of electronic orbits (Landau levels) under magnetic fields.
 
-## 🎯 El Reto
+## 🎯 The Challenge
 
-El desafío principal consistía en modelar computacionalmente sistemas cuánticos complejos, partiendo de los principios de la ecuación de Schrödinger, para observar comportamientos no intuitivos de la materia:
+The main challenge consisted in computationally modeling complex quantum systems, starting from the principles of the Schrödinger equation, to observe non-intuitive behaviors of matter:
 
-- **Efecto Túnel Resonante:** Calcular el coeficiente de transmisión de un electrón a través de un potencial de doble barrera. Debíamos demostrar numéricamente cómo la probabilidad de transmisión alcanza la unidad perfecta cuando la energía del electrón coincide con los estados cuánticos del pozo, y cómo esta resonancia se ve afectada al introducir asimetrías o sesgos externos.  
-- **Niveles de Landau:** Simular el movimiento de un electrón orbitando bajo un campo magnético estacionario. Usando el gauge de Landau, el problema se transforma en un oscilador armónico cuántico desplazado. El gran reto era calcular computacionalmente estados altamente excitados para visualizar la convergencia entre la mecánica cuántica y la física clásica.  
+- **Resonant Tunneling Effect:** Calculating the transmission coefficient of an electron through a double-barrier potential. We had to numerically demonstrate how the transmission probability reaches perfect unity when the electron's energy matches the quantum states of the well, and how this resonance is affected by introducing asymmetries or external biases.
+- **Landau Levels:** Simulating the motion of an electron orbiting under a stationary magnetic field. Using the Landau gauge, the problem maps into a displaced quantum harmonic oscillator. The big challenge was computationally calculating highly excited states to visualize the convergence between quantum mechanics and classical physics.
 
-## 🚀  Implementación Numérica
+## 🚀 Numerical Implementation
 
-Desarrollamos algoritmos enfocados en la estabilidad computacional y la fidelidad física, evitando simuladores de "caja negra":
+We developed algorithms focused on computational stability and physical fidelity, avoiding "black-box" simulators:
 
-### 1. Dinámica de Transmisión (Doble Barrera GaAs/GaAlAs)
-Implementamos el modelado del coeficiente de transmisión utilizando la masa efectiva del electrón (0.067 me) tanto para los pozos de GaAs como para las barreras de GaAlAs.  
+### 1. Transmission Dynamics (GaAs/GaAlAs Double Barrier)
+We implemented the transmission coefficient modeling using the electron's effective mass (0.067 me) for both the GaAs wells and the GaAlAs barriers.
 
-* **El Caso Simétrico:** Localizamos las energías de resonancia exactas para una estructura teórica con barreras de 1 eV.  
-* **El Caso Asimétrico (Estructural):** Computamos el sistema enfrentando al electrón a barreras desiguales (0.5 eV frente a 1.13 eV), evaluando la degradación del efecto túnel.  
-* **Sesgo Externo (Aplicación de Campo):** Modelamos un campo eléctrico uniforme a lo largo de la estructura, introduciendo una caída de potencial de -0.63 eV en la barrera derecha respecto a la izquierda, simulando así las condiciones operativas de un diodo túnel real.  
+* **The Symmetric Case:** We located the exact resonance energies for a theoretical structure with 1 eV barriers.
+* **The Asymmetric (Structural) Case:** We computed the system by confronting the electron with unequal barriers (0.5 eV vs. 1.13 eV), evaluating the degradation of the tunneling effect.
+* **External Bias (Applied Field):** We modeled a uniform electric field along the structure, introducing a potential drop of -0.63 eV in the right barrier relative to the left one, thus simulating the operating conditions of a real tunneling diode.
 
-### 2. Generación Recursiva de Estados de Landau
-Para evitar el desbordamiento de memoria (overflow) y la inestabilidad que supone calcular factoriales o polinomios de Hermite inmensos desde cero, diseñamos un enfoque iterativo:
+### 2. Recursive Generation of Landau States
+To avoid memory overflow and the instability involved in calculating factorials or massive Hermite polynomials from scratch, we designed an iterative approach:
 
-* **Algoritmo de Recurrencia:** Utilizamos las funciones de onda del estado fundamental y el primer estado excitado como semillas matemáticas. A partir de ahí, aplicamos una relación de recurrencia robusta para generar los estados de índice superior de forma secuencial.  
-* **El Límite Clásico:** Computamos y graficamos exitosamente la función de onda y la densidad de probabilidad extrema para los niveles n=18, n=50 y n=100.  
+* **Recurrence Algorithm:** We used the wavefunctions of the ground state and the first excited state as mathematical seeds. From there, we applied a robust recurrence relation to sequentially generate higher-index states.
+* **The Classical Limit:** We successfully computed and plotted the wavefunction and the extreme probability density for the levels n=18, n=50, and n=100.
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Technologies Used
 
-* **Phyton:** Como motor principal para la resolución numérica, la iteración espacial y la gestión de recurrencias.
-* **Numpy:** Para la vectorización masiva de las funciones de onda sobre miles de puntos espaciales y el cálculo de números complejos.
-* **Matplotlib:** Creación de visualizaciones gráficas avanzadas para interpretar densidades de probabilidad y espectros de transmisión.
+* **Python:** As the main engine for numerical resolution, spatial iteration, and recurrence management.
+* **NumPy:** For massive vectorization of wavefunctions over thousands of spatial points and complex number computation.
+* **Matplotlib:** Creation of advanced graphical visualizations to interpret probability densities and transmission spectra.
 
-## 🏆 Logros Destacados
+## 🏆 Key Achievements
 
-- **Demostración del Principio de Correspondencia:** En la simulación del nivel de Landau n=100, se observa perfectamente cómo la densidad de probabilidad cuántica "imita" a la clásica, acumulando la mayor probabilidad en los puntos de retorno (los bordes del oscilador), validando la teoría física a nivel numérico.  
-- **Flexibilidad del Solver:** El código de transmisión es capaz de resolver cualquier perfil de potencial arbitrario, asimilando saltos abruptos o gradientes continuos (como los introducidos por el sesgo eléctrico).
+- **Demonstration of the Correspondence Principle:** In the simulation of the Landau level n=100, it is perfectly observed how the quantum probability density "mimics" the classical one, accumulating the highest probability at the turning points (the edges of the oscillator), validating the physical theory at a numerical level.
+- **Solver Flexibility:** The transmission code is capable of resolving any arbitrary potential profile, assimilating abrupt jumps or continuous gradients (such as those introduced by the electric bias).
 
+> *Lab assignments developed for the Advanced Quantum Mechanics Laboratory - UC3M Physics Department.*
 
-
-> *Prácticas desarrolladas para Advanced Quantum Mechanics Laboratory - UC3M Physics Department.*
